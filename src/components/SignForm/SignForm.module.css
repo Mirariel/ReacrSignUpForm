@@ -1,0 +1,47 @@
+.confirm,
+.confirm:focus {
+  border: 2px solid greenyellow;
+}
+
+.notConfirm {
+  border: 2px solid red;
+}
+
+.signUpForm {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  max-width: 400px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.inputName {
+  font-size: 0.7rem;
+  padding-bottom: 7px;
+  color: hsl(142.65deg 57.65% 66.67%);
+}
+
+.input {
+  padding: 5px 15px;
+  border: 1px solid grey;
+}
+
+.signBtn {
+  background-color: hsl(142.65deg 57.65% 66.67%);
+  color: white;
+  border: none;
+  padding: 8px;
+  width: 95%;
+  align-self: center;
+}
+
+.signBtn:hover {
+  cursor: pointer;
+  background-color: hsla(143, 58%, 67%, 0.567);
+}
