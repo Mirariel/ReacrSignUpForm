@@ -1,5 +1,12 @@
 import { Component } from "react";
 import style from "./SignForm.module.css";
+import classNames from "classnames";
+
+const VALIDATORS = {
+  name: /^[A-Z][a-z]{2,15}\s[A-Z][a-z]{2,15}$/,
+  email: /^.+@.+$/,
+  password: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d\s])\S{8,16}$/,
+};
 
 const INITIAL_VALUES = {
   email: "",
@@ -9,16 +16,24 @@ const INITIAL_VALUES = {
 };
 
 class SignForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...INITIAL_VALUES,
-    };
-  }
+  state = {
+    ...INITIAL_VALUES,
+  };
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
+  };
+
+  isValid = (field) => {
+    VALIDATORS[field].test(this.state[field]);
+  };
+
+  getFieldClass = (field) => {
+    classNames(style.input, {
+      [style.input]: true,
+      [style.valid]: this.state[field] !== "" && this.isValid(field),
+      [style.invalid]: this.state[field] !== "" && !this.isValid(field),
+    });
   };
 
   signUp = (e) => {
@@ -32,24 +47,30 @@ class SignForm extends Component {
   render() {
     const { name, password, email, passwordConfirm } = this.state;
     const isMatch = passwordConfirm !== "" && passwordConfirm === password;
+    const confirmClass = classNames({
+      [style.input]: true,
+      [style.confirm]: passwordConfirm !== "" && isMatch,
+      [style.notConfirm]: passwordConfirm !== "" && !isMatch,
+    });
+
     return (
       <form className={style.signUpForm}>
         <label className={style.label}>
           <span className={style.inputName}>FULL NAME: </span>
           <input
-            className={style.input}
+            className={this.getFieldClass(name)}
             type="text"
             name="name"
             placeholder="your name"
             autoFocus
             value={name}
-            onChange={this.handleNameChange}
+            onChange={this.handleChange}
           />
         </label>
         <label className={style.label}>
           <span className={style.inputName}>EMAIL: </span>
           <input
-            className={style.input}
+            className={this.getFieldClass(email)}
             type="email"
             name="email"
             placeholder="your email"
@@ -61,7 +82,7 @@ class SignForm extends Component {
         <label className={style.label}>
           <span className={style.inputName}>PASSWORD: </span>
           <input
-            className={style.input}
+            className={this.getFieldClass(password)}
             type="password"
             name="password"
             placeholder="your password"
@@ -73,15 +94,17 @@ class SignForm extends Component {
         <label className={style.label}>
           <span className={style.inputName}>CONFIRM PASSWORD: </span>
           <input
-            className={`${style.input} ${isMatch ? style.confirm : style.notConfirm}`}
+            className={confirmClass}
             type="password"
-            name="passwordConfirmation"
+            name="passwordConfirm"
             placeholder="Confirmation password"
             autoFocus
             onChange={this.handleChange}
           />
         </label>
-        <button className={style.signBtn} onClick={this.signUp}>SignUp</button>
+        <button className={style.signBtn} onClick={this.signUp}>
+          SignUp
+        </button>
       </form>
     );
   }
