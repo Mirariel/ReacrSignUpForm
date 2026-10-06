@@ -44,7 +44,7 @@
   border: 2px solid greenyellow;
 }
 
-.notvalid,
+.invalid,
 .notConfirm {
   border: 2px solid red;
 }
