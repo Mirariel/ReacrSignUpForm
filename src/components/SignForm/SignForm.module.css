@@ -27,9 +27,11 @@
   background-color: hsl(142.65deg 57.65% 66.67%);
   color: white;
   border: none;
-  padding: 8px;
+  padding: 15px;
   width: 95%;
   align-self: center;
+  margin: 15px 0;
+  border-radius: 5px;
 }
 
 .signBtn:hover {
@@ -47,4 +49,24 @@
 .invalid,
 .notConfirm {
   border: 2px solid red;
+}
+
+.labelCheckbox {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.checkboxText {
+  padding: 0 5px;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+.text {
+  padding: 10px;
+}
+
+.signIn {
+  color: hsla(143, 58%, 67%, 0.567);
 }

@@ -114,17 +114,26 @@ class SignForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <label>
+        <label className={style.labelCheckbox}>
           <input
             type="checkbox"
             name="checkboxValue"
             checked={checkboxValue}
             onChange={this.handleChange}
           />
+          <span className={style.checkboxText}>
+            I agree all statements in terms of service
+          </span>
         </label>
         <button className={style.signBtn} onClick={this.signUp}>
           SignUp
         </button>
+        <p className={style.text}>
+          I`m already a member!{" "}
+          <a href="#" className={style.signIn}>
+            Sign In
+          </a>
+        </p>
       </form>
     );
   }
